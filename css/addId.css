@@ -1,0 +1,77 @@
+.titleId {
+  padding: 20px 30px;
+  background-color: rgb(247, 247, 247);
+  border-bottom: 1px solid #ccc;
+}
+.range {
+  padding: 20px 30px;
+  background-color: rgb(237, 237, 237);
+}
+.center {
+  padding: 30px;
+  padding-top: 0px;
+  position: relative;
+}
+.center .title {
+  border-bottom: 2px solid rgb(27, 172, 5);
+  padding: 14px;
+  margin: 10px -7px;
+}
+.center .list {
+  height: 40px;
+  padding: 10px 0;
+  line-height: 40px;
+  margin-bottom: 20px;
+}
+.center .listName {
+  margin-right: 90px;
+  margin-top: 10px;
+}
+.center .list select {
+  height: 40px;
+  position: absolute;
+  left: 150px;
+  padding: 0 10px;
+  width: 150px;
+}
+.center .list .test {
+  height: 40px;
+  position: absolute;
+  left: 150px;
+  padding: 0 10px;
+}
+.sex {
+  position: absolute;
+  left: 150px;
+}
+.sex input {
+  margin-left: 10px;
+}
+.benefit {
+  text-align: center;
+}
+.benefit {
+  margin: 30px 0;
+  font-size: 14px;
+}
+.time {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.but {
+  width: 300px;
+  height: 45px;
+  margin: auto;
+  line-height: 45px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.more {
+  background-color: rgb(27, 172, 5);
+}
+.exit {
+  background-color: rgb(157, 160, 157);
+}
