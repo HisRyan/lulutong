@@ -36,16 +36,64 @@
   background-color: rgb(255, 255, 255);
   height: 40px;
   width: 60px;
-  text-align: center;
-  line-height: 40px;
+  display: flex;
   border-radius: 15px;
   color: rgb(26, 171, 4);
 }
+.sort li:hover >p:nth-child(1){
+  background-color: rgb(26, 171, 4);
+}
+.sort li>p{
+  margin: auto;
+  background-color: #fff;
+}
+
 .sort li .hide {
   position: absolute;
   right: 0;
   left: 0;
-  top: 50px;
-  bottom: 0px;
+  top: 40px;
+  height: 100px;
+  color: #000000;
+  padding: 20px;
+}
+.hide1{
+  z-index: 111;
+}
+.hide2{
   display: none;
+  z-index: 111;
+}
+.sort li:hover{
+  background-color:  rgb(26, 171, 4);
+  color: #fff;
+}
+.sort li:hover .hide2{
+  display: block;
+  
+}
+.hide p{
+  margin-bottom: 30px;
+}
+.hide p span{
+  position: absolute;
+  left:150px;
+}
+.but {
+  width: 300px;
+  height: 45px;
+  margin: auto;
+  line-height: 45px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  color:#fff
+}
+
+.more {
+  background-color: rgb(27, 172, 5);
+  margin-top: 450px;
+}
+.exit {
+  background-color: rgb(157, 160, 157);
 }
