@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: rgb(239, 239, 244);
+}
+.title {
+  background-color: rgb(240, 239, 245);
+  padding: 20px;
+}
+
+.content li {
+  height: 60px;
+  line-height: 60px;
+  padding-left: 20px;
+}
+.content li:nth-child(2n) {
+  background-color: rgb(247, 247, 247);
+}
+.content li:nth-child(2n + 1) {
+  background-color: rgb(237, 237, 237);
+}
+.money {
+  color: orange;
+}
+.person {
+  position: relative;
+}
+.sort {
+  display: flex;
+  width: 250px;
+  margin: 30px auto;
+  justify-content: space-between;
+}
+.sort li {
+  background-color: rgb(255, 255, 255);
+  height: 40px;
+  width: 60px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 15px;
+  color: rgb(26, 171, 4);
+}
+.sort li .hide {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50px;
+  bottom: 0px;
+  display: none;
+}

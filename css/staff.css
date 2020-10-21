@@ -1,0 +1,36 @@
+* {
+  background-color: rgb(239, 239, 244);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.title {
+  padding: 20px 30px;
+  background-color: rgb(239, 239, 244);
+  border-bottom: 1px solid #ccc;
+}
+.id {
+  padding: 20px 30px;
+  background-color: rgb(247, 247, 247);
+  border-bottom: 1px solid #ccc;
+}
+.message {
+  padding: 20px 30px;
+  background-color: rgb(237, 237, 237);
+}
+.but {
+  width: 300px;
+  height: 45px;
+  margin: auto;
+  line-height: 45px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.more {
+  background-color: rgb(27, 172, 5);
+}
+.exit {
+  background-color: rgb(157, 160, 157);
+}
