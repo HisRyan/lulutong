@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>服务卡激活</title>
     <link rel="stylesheet" href="/css/homeCard.css">
+    <script src="/js/ajax.js"></script>
+    <script src="/js/regular.js"></script>
 </head>
 
 <body>
@@ -33,10 +35,10 @@
     <div class="main">
         <form action="">
             <div>
-                <input type="text" placeholder="卡号">
+                <input class="cardId" type="text" placeholder="卡号">
             </div>
             <div>
-                <input type="password" placeholder="密码">
+                <input class="passWord" type="password" placeholder="密码">
                 <img class="pwd" src="/image/eyepwd.png" alt="">
             </div>
             <div>
@@ -47,5 +49,37 @@
         </form>
     </div>
 </body>
+<script>
+    var nextDOM = document.querySelector('.next');
+
+    nextDOM.addEventListener('click', function () {
+
+        //获取用户输入的值
+        var id = document.querySelector('.cardId').value;
+        var pwd = document.querySelector('.passWord').value;
+        console.log(id);
+
+        //判断id是否符合
+
+
+        //调用ajax函数
+        myajax({
+            "url": "/php/actlogin.php",
+            "arg": {
+                "id": id,
+                "pwd": pwd,
+            },
+            "success": function (re) {
+                if (re.state === true) {
+                    window.location.href = "addId.html"
+                } else {
+                    console.log("失败");
+                    console.log(re);
+                }
+
+            }
+        });
+    });
+</script>
 
 </html>
