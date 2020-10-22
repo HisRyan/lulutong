@@ -6,134 +6,189 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>投保信息</title>
     <link rel="stylesheet" href="/css/idMessage.css">
+    <script src="/js/ajax.js"></script>
 </head>
 
 <body>
-    <div class="title">
-        投保信息
-    </div>
-    <ul class="content">
-        <li>
-            <span>畅行无忧C卡</span>
-            <span>面值100.00元</span>
-        </li>
-        <li>
-            本卡卡号：<span>1111111</span>
-        </li>
-        <li>
-            本卡激活日期：<span>2019-03-12</span>
-        </li>
-        <li>
-            本卡保险生效日期：<span>2019-03-14</span>
-        </li>
-        <li>
-            本卡保险生效日期：<span>2019-03-14</span>
-        </li>
-        <li>
-            本卡保额信息：
-        </li>
-        <li>
-            交通意外事故、伤残最高保险金额 <span class="money">15000.00</span>
-        </li>
-        <li>
-            交通意外医疗最高保险金额 <span class="money">5000.00</span>
-        </li>
-    </ul>
+    <div class="all">
 
-    <div class="person">
-        <ul class="sort">
-            <li> <p>投保人</p>
-                <div class="hide hide1">
-                    <p>投保人姓名 
-                        <span>1</span>
-                    </p>
-                    <p>证件
-                        <span>2</span>
-                    </p>
-                    <p>证件号码
-                        <span>3</span>
-                    </p>
-                    <p>性别
-                        <span>4</span>
-                    </p>
-                    <p>出生日期
-                        <span>5</span>
-                    </p>
-                    <p>电子邮箱
-                        <span>6</span>
-                    </p>
-                    <p>手机号
-                        <span>7</span>
-                    </p>
-                    <p>地址
-                        <span>8</span>
-                    </p>
-                </div>
-            </li>
-            <li><p>被保人</p>
-                <div class="hide hide2">
-                    <p>投保人姓名 
-                        <span>11</span>
-                    </p>
-                    <p>证件
-                        <span>22</span>
-                    </p>
-                    <p>证件号码
-                        <span>33</span>
-                    </p>
-                    <p>性别
-                        <span>44</span>
-                    </p>
-                    <p>出生日期
-                        <span>55</span>
-                    </p>
-                    <p>电子邮箱
-                        <span>66</span>
-                    </p>
-                    <p>手机号
-                        <span>77</span>
-                    </p>
-                    <p>地址
-                        <span>88</span>
-                    </p>
-                </div>
-            </li>
-            <li><p>受益人</p>
-                <div class="hide hide3">
-                    <p>投保人姓名 
-                        <span>111</span>
-                    </p>
-                    <p>证件
-                        <span>222</span>
-                    </p>
-                    <p>证件号码
-                        <span>333</span>
-                    </p>
-                    <p>性别
-                        <span>444</span>
-                    </p>
-                    <p>出生日期
-                        <span>555</span>
-                    </p>
-                    <p>电子邮箱
-                        <span>666</span>
-                    </p>
-                    <p>手机号
-                        <span>777</span>
-                    </p>
-                    <p>地址
-                        <span>888</span>
-                    </p>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="but more">
-        查看理赔信息
-    </div>
-    <div class="but exit">
-        安全退出
     </div>
 </body>
+<script>
+    var shopage = getUrlArg();
+    var currid = shopage.id;
+    var allDOM = document.querySelector('.all');
+    showMessage(currid);
+
+    function showMessage(index) {
+        myajax({
+            "url": "/php/message.php",
+            "arg": {
+                "classid": index
+            },
+            "success": function (re) {
+                console.log(re);
+                if (re.state === true) {
+                    let tmp = ` <div class="title">
+            投保信息
+        </div>
+        <ul class="content">
+            <li>
+                <span>畅行无忧${re.data[0].cardType}卡</span>
+                <span>面值${re.data[0].cardMoney}元</span>
+            </li>
+            <li>
+                本卡卡号：${currid}
+            </li>
+            <li>
+                本卡激活日期：${re.data[0].actionDate}
+            </li>
+            <li>
+                本卡保险生效日期：${re.data[0].activationDate}
+            </li>
+            <li>
+                本卡保额信息：
+            </li>
+            <li>
+                交通意外事故、伤残最高保险金额 <span class="money">${re.data[0].coverage}</span>
+            </li>
+            <li>
+                交通意外医疗最高保险金额 <span class="money">${re.data[0].accidental}</span>
+            </li>
+        </ul>
+
+        <div class="person">
+            <ul class="sort">
+                <li>
+                    <p>投保人</p>
+                    <div class="hide hide1">
+                        <p>投保人姓名
+                            <span>${re.data[0].actionUser}</span>
+                        </p>
+                        <p>证件
+                            <span>2</span>
+                        </p>
+                        <p>证件号码
+                            <span>3</span>
+                        </p>
+                        <p>性别
+                            <span>4</span>
+                        </p>
+                        <p>出生日期
+                            <span>5</span>
+                        </p>
+                        <p>电子邮箱
+                            <span>6</span>
+                        </p>
+                        <p>手机号
+                            <span>7</span>
+                        </p>
+                        <p>地址
+                            <span>8</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <p>被保人</p>
+                    <div class="hide hide2">
+                        <p>投保人姓名
+                            <span>11</span>
+                        </p>
+                        <p>证件
+                            <span>22</span>
+                        </p>
+                        <p>证件号码
+                            <span>33</span>
+                        </p>
+                        <p>性别
+                            <span>44</span>
+                        </p>
+                        <p>出生日期
+                            <span>55</span>
+                        </p>
+                        <p>电子邮箱
+                            <span>66</span>
+                        </p>
+                        <p>手机号
+                            <span>77</span>
+                        </p>
+                        <p>地址
+                            <span>88</span>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <p>受益人</p>
+                    <div class="hide hide3">
+                        <p>投保人姓名
+                            <span>111</span>
+                        </p>
+                        <p>证件
+                            <span>222</span>
+                        </p>
+                        <p>证件号码
+                            <span>333</span>
+                        </p>
+                        <p>性别
+                            <span>444</span>
+                        </p>
+                        <p>出生日期
+                            <span>555</span>
+                        </p>
+                        <p>电子邮箱
+                            <span>666</span>
+                        </p>
+                        <p>手机号
+                            <span>777</span>
+                        </p>
+                        <p>地址
+                            <span>888</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="but more">
+            查看理赔信息
+        </div>
+        <div class="but exit">
+            安全退出
+        </div>`;
+                    allDOM.innerHTML += tmp;
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+    function getUrlArg() {
+        let args = {};
+        let url = window.location.href;
+        //判断是否有问号
+        if (url.includes("?")) {
+            let argStr = url.split("?")[1]; //"page=2&pagesize=5"
+            let argArr = argStr.split("&"); //["page=2","pagesize=5"]
+            for (let i = 0; i < argArr.length; i++) {
+                //判断是否有等号
+                if (argArr[i].includes("=")) {
+                    let argItem = argArr[i].split("=");
+                    //判断值是否为空
+                    let keyName = argItem[0];
+                    let keyValue = argItem[1];
+                    args[keyName] = keyValue; //关键语句
+                }
+            }
+        }
+        return args;
+    }
+</script>
 
 </html>
