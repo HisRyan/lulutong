@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>服务卡登录</title>
     <link rel="stylesheet" href="/css/homeCard.css">
+    <script src="/js/ajax.js"></script>
+    <script src="/js/regular.js"></script>
 </head>
 
 <body>
@@ -21,23 +23,81 @@
             </li>
         </ul>
     </div>
-
     <div class="main">
         <form action="">
             <div>
-                <input type="text" placeholder="卡号">
+                <input class="cardId" type="text" placeholder="卡号">
+                <p class="idTrue"></p>
             </div>
+
             <div>
-                <input type="password" placeholder="密码/身份证号">
+                <input class="passWord" type="password" placeholder="密码/身份证号">
                 <img class="pwd" src="/image/eyepwd.png" alt="">
+                <p class="pwdTrue"></p>
             </div>
+
             <div>
                 <input type="text" placeholder="验证码">
-                <img class="imgpwd" src="/image/yzm.jpg" alt="">
+                <img class="imgpwd" src="/php/validatecode.php" alt=""
+                    onclick="javascript:this.src ='/php/validatecode.php?tm='+Math.random();">
+                <p class="logoTrue"></p>
             </div>
+
             <input class="next" type="button" name="" id="" value="下一步">
         </form>
     </div>
 </body>
+<script>
+    var nextDOM = document.querySelector('.next');
+    var cardId = document.querySelector('.cardId')
+    var passWord = document.querySelector('.passWord')
+    var idDOM = document.querySelector('.idTrue');
+    var pwdDOM = document.querySelector('.pwdTrue');
+    var logoDOm = document.querySelector('.logoTrue');
+    var reg = new RegQ();
+    //输入id失去焦点后正则判断id
+    cardId.addEventListener('blur', function () {
+        let id = cardId.value;
+        console.log(1);
+        if (reg.txqq(id)) {
+            idDOM.innerHTML = `<span>输入卡号格式正确</span>`;
+        } else {
+            idDOM.innerHTML = "输入卡号格式不正确 ";
+        }
+    })
+    //输入密码失去焦点后正则判断密码
+    passWord.addEventListener('blur', function () {
+        let pwd = passWord.value;
+        console.log(1);
+        if (reg.psword4(pwd)) {
+            pwdDOM.innerHTML = `<span>输入密码格式正确</span>`;
+        } else {
+            pwdDOM.innerHTML = "输入密码格式不正确 ";
+        }
+    })
+
+    //下一步点击事件
+    nextDOM.addEventListener('click', function () {
+        //获取用户输入的值
+        let id = document.querySelector('.cardId').value;
+        let pwd = document.querySelector('.passWord').value;
+        //调用ajax函数
+        myajax({
+            "url": "/php/login.php",
+            "arg": {
+                "id": id,
+                "pwd": pwd,
+            },
+            "success": function (re) {
+                if (re.state === true) {
+                    window.location.href = `idMessage.html?id=${re.data[0].cardNum}`;
+                } else {
+                    console.log("失败");
+                    console.log(re);
+                }
+            }
+        });
+    });
+</script>
 
 </html>
