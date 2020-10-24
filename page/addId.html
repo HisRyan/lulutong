@@ -10,142 +10,151 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <ul class="plan">
-            <li>
-                <div class="left ">1</div>
-                <div class="right">卡号密码</div>
-            </li>
-            <li>
-                <div class="left">2</div>
-                <div class="right">阅读条款</div>
-            </li>
-            <li>
-                <div class="left check">3</div>
-                <div class="right">信息填写</div>
-            </li>
-            <li>
-                <div class="left">4</div>
-                <div class="right">完成激活</div>
-            </li>
-        </ul>
-    </div>
+    <div>
+        <div class="wrap">
+            <ul class="plan">
+                <li>
+                    <div class="left ">1</div>
+                    <div class="right">卡号密码</div>
+                </li>
+                <li>
+                    <div class="left">2</div>
+                    <div class="right">阅读条款</div>
+                </li>
+                <li>
+                    <div class="left check">3</div>
+                    <div class="right">信息填写</div>
+                </li>
+                <li>
+                    <div class="left">4</div>
+                    <div class="right">完成激活</div>
+                </li>
+            </ul>
+        </div>
 
-    <div class="titleId">
-        <span>卡号:</span><span class="cardid"></span>
-    </div>
-    <div class="range">
-        被保人年龄区间：18至70周岁
-    </div>
+        <div class="titleId">
+            <span>卡号:</span><span class="cardid"></span>
+        </div>
+        <div class="range">
+            被保人年龄区间：18至70周岁
+        </div>
 
-    <div class="center">
-        <p class="title">投保人信息</p>
-        <form action="">
+        <div class="center">
+            <p class="title">投保人信息</p>
+
             <p class="list">
                 姓名
-                <input class="test" type="text">
+                <input class="test" type="text" name="name">
             </p>
             <p class="list">
                 身份证
-                <select name="" id="">
-                    <option value="">身份证</option>
-                    <option value="">军官证</option>
-                    <option value="">港澳台大陆通行证</option>
-                    <option value="">外国人永久居留证</option>
-                    <option value="">护照</option>
+                <select name="type" id="">
+                    <option value="居民身份证">居民身份证</option>
+                    <option value="军官证">军官证</option>
+                    <option value="港澳台大陆通行证">港澳台大陆通行证</option>
+                    <option value="外国人永久居留证">外国人永久居留证</option>
+                    <option value="护照">护照</option>
                 </select>
             </p>
             <p class="list">
                 性别
-                <span class="sex">
-                    <input type="radio" value="male">男生
-                    <input type="radio" value="female">女生
-                </span>
-            </p>
-            <p class="list">
-                出生日期
-                <input class="test" type="date">
-            </p>
-            <p class="list">
-                证件号码
-                <input class="test" type="text">
-            </p>
-            <p class="list">
-                电子邮件
-                <input class="test" type="text">
-            </p>
-            <p class="list">
-                手机号码
-                <input class="test" type="text">
-            </p>
-            <p class="list">
-                联系地址
-                <input class="test" type="text">
-            </p>
-        </form>
-    </div>
-
-    <div class="center">
-        <p class="title">被保人信息</p>
-        <form action="">
-            <p class="list">
-                姓名
-                <input class="test" type="text">
-            </p>
-            <p class="list">
-                身份证
-                <select name="" id="">
-                    <option value="">身份证</option>
-                    <option value="">军官证</option>
-                    <option value="">港澳台大陆通行证</option>
-                    <option value="">外国人永久居留证</option>
-                    <option value="">护照</option>
+                <select name="gender">
+                    <option value="m">男</option>
+                    <option value="f">女</option>
                 </select>
             </p>
             <p class="list">
-                性别
-                <span class="sex">
-                    <input type="radio" value="male">男生
-                    <input type="radio" value="female">女生
-                </span>
-            </p>
-            <p class="list">
                 出生日期
-                <input class="test" type="date">
+                <input class="test" type="date" name="data">
             </p>
             <p class="list">
                 证件号码
-                <input class="test" type="text">
+                <input class="test" type="text" name="perid">
             </p>
             <p class="list">
                 电子邮件
-                <input class="test" type="text">
+                <input class="test" type="text" name="email">
             </p>
             <p class="list">
                 手机号码
-                <input class="test" type="text">
+                <input class="test" type="text" name="pho">
             </p>
             <p class="list">
                 联系地址
-                <input class="test" type="text">
+                <input class="test" type="text" name="address">
             </p>
-        </form>
-    </div>
+            <input type="submit" value="提交">;
 
-    <div class="center foot">
-        <p class="title">受益人信息</p>
-        <p class="benefit">受益人为法定继承人</p>
-        <p class="time">生效有效期选择：<span class="start">2020-07-10</span>至<span class="end">2020-11-10</span></p>
-        <p><span>生效时期</span></p>
 
-        <div class="but more">
-            下一步
+
+            <div class="center">
+                <p class="title bb">被保人信息</p>
+                <form action="/php/addcard.php" method="GET">
+                    <p class="list bb">
+                        姓名
+                        <input class="test bb" type="text" name="name">
+                    </p>
+                    <p class="list">
+                        身份证
+                        <select name="type" id="" class="bb">
+                            <option value="居民身份证">居民身份证</option>
+                            <option value="军官证">军官证</option>
+                            <option value="港澳台大陆通行证">港澳台大陆通行证</option>
+                            <option value="外国人永久居留证">外国人永久居留证</option>
+                            <option value="护照">护照</option>
+                        </select>
+                    </p>
+                    <p class="list">
+                        性别
+                        <select name="gender">
+                            <option value="m">男</option>
+                            <option value="f">女</option>
+                        </select>
+                    </p>
+                    <p class="list">
+                        出生日期
+                        <input class="test bb" type="date" name="data">
+                    </p>
+                    <p class="list">
+                        证件号码
+                        <input class="test bb" type="text" name="perid">
+                    </p>
+                    <p class="list">
+                        电子邮件
+                        <input class="test bb" type="text" name="email">
+                    </p>
+                    <p class="list">
+                        手机号码
+                        <input class="test bb" type="text" name="pho">
+                    </p>
+                    <p class="list">
+                        联系地址
+                        <input class="test bb" type="text" name="address">
+                    </p>
+
+                </form>
+            </div>
+
+            <div class="center foot">
+                <p class="title">受益人信息</p>
+                <p class="benefit">受益人为法定继承人</p>
+                <p class="time">生效有效期选择：<span class="start">2020-07-10</span>至<span class="end">2020-11-10</span></p>
+                <p><span>生效时期</span></p>
+
+                <div class="but more">
+                    下一步
+                </div>
+                <div class="but exit">
+                    安全退出
+                </div>
+            </div>
         </div>
-        <div class="but exit">
-            安全退出
-        </div>
-    </div>
-
 </body>
+
+<script>
+    var id = sessionStorage.getItem('id');
+    var cardidDOM = document.querySelector(".cardid");
+    cardidDOM.textContent = id;
+</script>
 
 </html>
