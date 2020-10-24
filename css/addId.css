@@ -76,3 +76,7 @@
 .exit {
   background-color: rgb(157, 160, 157);
 }
+.cardid {
+  color: orange;
+  margin-left: 20px;
+}
