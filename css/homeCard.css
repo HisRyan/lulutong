@@ -45,6 +45,7 @@ body {
   margin-bottom: 40px;
   display: flex;
   height: 40px;
+  position: relative;
 }
 .main div input {
   width: 100%;
@@ -68,6 +69,68 @@ body {
   outline: none;
   border: none;
   color: rgb(240, 249, 239);
-  font-size: 15px;
+  font-size: 12px;
   border-radius: 5px;
+}
+.main .checkId {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+}
+.main .idTrue {
+  color: #008000;
+  font-size: 12px;
+}
+.main .idFalse {
+  color: red;
+  font-size: 12px;
+}
+.main .checkPwd {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  color: red;
+  font-size: 12px;
+}
+.main .checkCode {
+  position: absolute;
+  top: -30px;
+  left: 10px;
+  color: red;
+  font-size: 12px;
+}
+.hint {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 120px;
+  margin-left: -125px;
+  margin-top: -200px;
+  border: 1px #ccc solid;
+  background-color: rgb(255, 140, 0);
+  display: none;
+}
+.hint p {
+  text-align: center;
+  margin-bottom: 40px;
+  color: red;
+}
+.hint .go {
+  display: inline-block;
+
+  margin-right: 80px;
+  margin-left: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 12px;
+}
+.hint input {
+  display: inline-block;
+  text-decoration: none;
+  width: 60px;
+  height: 30px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 12px;
 }
