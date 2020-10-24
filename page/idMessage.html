@@ -16,7 +16,8 @@
 </body>
 <script>
     var shopage = getUrlArg();
-    var currid = shopage.id;
+    var currid = sessionStorage.getItem('id'); //获取session中的数据
+    console.log(currid);
     var allDOM = document.querySelector('.all');
     showMessage(currid);
 
@@ -27,33 +28,33 @@
                 "classid": index
             },
             "success": function (re) {
-                console.log(re);
                 if (re.state === true) {
+                    console.log(re);
                     let tmp = ` <div class="title">
             投保信息
         </div>
         <ul class="content">
             <li>
-                <span>畅行无忧${re.data[0].cardType}卡</span>
-                <span>面值${re.data[0].cardMoney}元</span>
+                <span>畅行无忧${re.data[0].type}卡</span>
+                <span>面值${re.data[0].cost}元</span>
             </li>
             <li>
                 本卡卡号：${currid}
             </li>
             <li>
-                本卡激活日期：${re.data[0].actionDate}
+                本卡激活日期：${re.datamore[0].createtime}
             </li>
             <li>
-                本卡保险生效日期：${re.data[0].activationDate}
+                本卡保险生效日期：${re.datamore[0].effecttime}
             </li>
             <li>
                 本卡保额信息：
             </li>
             <li>
-                交通意外事故、伤残最高保险金额 <span class="money">${re.data[0].coverage}</span>
+                交通意外事故、伤残最高保险金额 <span class="money">${re.data[0].accmoney}</span>
             </li>
             <li>
-                交通意外医疗最高保险金额 <span class="money">${re.data[0].accidental}</span>
+                交通意外医疗最高保险金额 <span class="money">${re.data[0].houmoney}</span>
             </li>
         </ul>
 
@@ -63,28 +64,28 @@
                     <p>投保人</p>
                     <div class="hide hide1">
                         <p>投保人姓名
-                            <span>${re.data[0].actionUser}</span>
+                            <span>${re.datamore[0].tb_name}</span>
                         </p>
                         <p>证件
-                            <span>2</span>
+                            <span>${re.datamore[0].tb_type}</span>
                         </p>
                         <p>证件号码
-                            <span>3</span>
+                            <span>${re.datamore[0].tb_card}</span>
                         </p>
                         <p>性别
-                            <span>4</span>
+                            <span>${re.datamore[0].tb_sex}</span>
                         </p>
                         <p>出生日期
-                            <span>5</span>
+                            <span>${re.datamore[0].tb_birthday}</span>
                         </p>
                         <p>电子邮箱
-                            <span>6</span>
+                            <span>${re.datamore[0].tb_email}</span>
                         </p>
                         <p>手机号
-                            <span>7</span>
+                            <span>${re.datamore[0].tb_phone}</span>
                         </p>
                         <p>地址
-                            <span>8</span>
+                            <span>${re.datamore[0].tb_address}</span>
                         </p>
                     </div>
                 </li>
@@ -92,28 +93,28 @@
                     <p>被保人</p>
                     <div class="hide hide2">
                         <p>投保人姓名
-                            <span>11</span>
+                            <span>${re.datamore[0].bb_name}</span>
                         </p>
                         <p>证件
-                            <span>22</span>
+                            <span>${re.datamore[0].bb_type}</span>
                         </p>
                         <p>证件号码
-                            <span>33</span>
+                            <span>${re.datamore[0].bb_card}</span>
                         </p>
                         <p>性别
-                            <span>44</span>
+                            <span>${re.datamore[0].bb_sex}</span>
                         </p>
                         <p>出生日期
-                            <span>55</span>
+                            <span>${re.datamore[0].bb_birthday}</span>
                         </p>
                         <p>电子邮箱
-                            <span>66</span>
+                            <span>${re.datamore[0].bb_email}</span>
                         </p>
                         <p>手机号
-                            <span>77</span>
+                            <span>${re.datamore[0].bb_phone}</span>
                         </p>
                         <p>地址
-                            <span>88</span>
+                            <span>${re.datamore[0].bb_address}</span>
                         </p>
                     </div>
                 </li>
