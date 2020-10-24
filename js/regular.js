@@ -70,12 +70,19 @@ function RegQ() {
         return isMath;
     }
 
-    //QQ
-    this.txqq = function (str) {
-        //5到12位数字构成
 
-        var isMath = /^[0-9]{8}/.test(str);
+    this.txqq = function (str) {
+
+
+        var isMath = /^[0-9]{8}$/.test(str);
         return isMath;
     }
+
+    this.nonull = function (str) {
+        var isMath = /^\s*$/g.test(str);
+        return isMath;
+    }
+
+
 
 }
