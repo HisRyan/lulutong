@@ -4,7 +4,7 @@
 //编码
 header("Content-type: text/html; charset=utf-8");
 
-$id=$_GET['id'];
+$id=$_GET['classid'];
 $act=$_GET['act'];
 
 //数据库实例
@@ -13,7 +13,7 @@ $dbc = new MySQLi("127.0.0.1","root","root","lh_lulutong");
 mysqli_query($dbc, "set names utf8");
 
 //判断
-if($act="staff"){
+if($act=="staff"){
     $sql="select *from lh_staff where cardnum='$id'";
     $result = $dbc->query($sql);
     $arr = array();//定义数组
@@ -40,11 +40,11 @@ if($act="staff"){
     }
 }
 
-else{
+else if($act=="stid"){
 
 //拼接查询语句
-$sql = "select *from lh_card where cardnum=$classid"  ;
-$sqlmore="select *from lh_actcard where cardnum=$classid";
+$sql = "select *from lh_card where cardnum=$id"  ;
+$sqlmore="select *from lh_actcard where cardnum=$id";
 // .$classSQL.$readcountSQL." limit ".$startIndex.",".$pageSize
 //调试SQL语句
 // print_r($sql); exit();
@@ -75,7 +75,7 @@ while($arr_tmp1 = $restch->fetch_assoc()){
 
 $re = array(
     "state"=>true,
-    "code"=>1,
+    "code"=>2,
     "msg"=>'成功',
     "data" => $arr,
     "datamore"=>$arr1,

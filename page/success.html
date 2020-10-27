@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完成激活</title>
+    <link rel="stylesheet" href="/css/homeCard.css">
+    <link rel="stylesheet" href="/css/addId.css">
+    <link rel="stylesheet" href="/css/success.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="plan">
+            <li>
+                <div class="left ">1</div>
+                <div class="right">卡号密码</div>
+            </li>
+            <li>
+                <div class="left">2</div>
+                <div class="right">阅读条款</div>
+            </li>
+            <li>
+                <div class="left ">3</div>
+                <div class="right">信息填写</div>
+            </li>
+            <li>
+                <div class="left check">4</div>
+                <div class="right">完成激活</div>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="titleId">
+        <span>卡号:</span><span class="cardid"></span>
+    </div>
+    <div class="success">
+        <img src="/image/成功.png" alt="">
+    </div>
+    <p class="txt">成功激活</p>
+    <div class="next">立即登录</div>
+    <div class="exit">返回激活界面</div>
+</body>
+<script>
+    var id = sessionStorage.getItem('id');
+    var cardidDOM = document.querySelector(".cardid");
+    cardidDOM.textContent = id;
+    var nextDOM = document.querySelector(".next");
+    nextDOM.addEventListener("click", function () {
+
+        window.location.href = "login.html"
+    })
+
+    var exitDOM = document.querySelector(".exit");
+    exitDOM.addEventListener("click", function () {
+        window.location.href = "loginActive.html"
+    })
+</script>
+
+</html>

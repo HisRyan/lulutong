@@ -134,3 +134,16 @@ body {
   background-color: #fff;
   font-size: 12px;
 }
+.successgo {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(27, 172, 5);
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  margin-left: -75px;
+  display: none;
+}

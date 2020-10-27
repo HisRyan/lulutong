@@ -7,10 +7,19 @@
     <title>信息录入</title>
     <link rel="stylesheet" href="/css/homeCard.css">
     <link rel="stylesheet" href="/css/addId.css">
+    <link rel="stylesheet" href="/Mdate/needcss/Mdate.css">
+    <script src="/js/regular.js"></script>
+    <script src="/js/ajax.js"></script>
+    <!-- <script src="/Mdate/iScroll.js"></script>
+    <script src="/Mdate/Mdate.js"></script> -->
+
+
 </head>
 
 <body>
+
     <div>
+
         <div class="wrap">
             <ul class="plan">
                 <li>
@@ -31,6 +40,8 @@
                 </li>
             </ul>
         </div>
+
+
         <div class="titleId">
             <span>卡号:</span><span class="cardid"></span>
         </div>
@@ -43,11 +54,12 @@
 
             <p class="list">
                 姓名
-                <input class="test" type="text" name="name">
+                <input class="test" type="text" name="name" id=tb_name>
+                <span class="cktb_name check2"></sapn>
             </p>
             <p class="list">
                 身份证
-                <select name="type" id="">
+                <select name="type" id="tb_type">
                     <option value="居民身份证">居民身份证</option>
                     <option value="军官证">军官证</option>
                     <option value="港澳台大陆通行证">港澳台大陆通行证</option>
@@ -56,104 +68,416 @@
                 </select>
             </p>
             <p class="list">
+                证件号码
+                <input class="test" type="text" id="tb_perid">
+                <span class="cktb_perid check2"></sapn>
+            </p>
+            <p class="list">
+                手机号码
+                <input class="test" type="text" id="tb_pho">
+                <span class="cktb_pho check2"></sapn>
+            </p>
+            <p class="list">
                 性别
-                <select name="gender">
+                <select id="tb_gender">
                     <option value="m">男</option>
                     <option value="f">女</option>
                 </select>
             </p>
             <p class="list">
                 出生日期
-                <input class="test" type="date" name="data">
+                <input class="test" type="date" id="tb_date">
+            </p>
+
+            <p class="list">
+                电子邮件
+                <input class="test" type="text" id="tb_email">
+                <span class="cktb_email check2"></sapn>
+            </p>
+
+            <p class="list">
+                联系地址
+                <input class="test" type="text" id="tb_address">
+            </p>
+        </div>
+
+        <div class="center">
+            <p class="title">被投保人信息</p>
+            <p class="list">
+                是投保人
+                <select id="relation">
+                    <option value="" disabled selected hidden>-请选择-</option>
+                    <option value="self">本人</option>
+                    <option value="par">父母</option>
+                    <option value="mate">配偶</option>
+                    <option value="sons">子女</option>
+                    <option value="other">其他</option>
+                </select>
+            </p>
+            <p class="list">
+                姓名
+                <input class="test" type="text" name="name" id=bb_name>
+                <span class="ckbb_name check2"></sapn>
+            </p>
+            <p class="list">
+                身份证
+                <select name="type" id="bb_type">
+                    <option value="居民身份证">居民身份证</option>
+                    <option value="军官证">军官证</option>
+                    <option value="港澳台大陆通行证">港澳台大陆通行证</option>
+                    <option value="外国人永久居留证">外国人永久居留证</option>
+                    <option value="护照">护照</option>
+                </select>
             </p>
             <p class="list">
                 证件号码
-                <input class="test" type="text" name="perid">
-            </p>
-            <p class="list">
-                电子邮件
-                <input class="test" type="text" name="email">
+                <input class="test" type="text" id="bb_perid">
+                <span class="ckbb_perid check2"></sapn>
             </p>
             <p class="list">
                 手机号码
-                <input class="test" type="text" name="pho">
+                <input class="test" type="text" id="bb_pho">
+                <span class="ckbb_pho check2"></sapn>
             </p>
             <p class="list">
-                联系地址
-                <input class="test" type="text" name="address">
+                性别
+                <select id="bb_gender">
+                    <option value="m">男</option>
+                    <option value="f">女</option>
+                </select>
             </p>
-            <input type="submit" value="提交">;
+            <p class="list">
+                出生日期
+                <input class="test" type="date" id="bb_date">
+            </p>
 
+            <p class="list">
+                电子邮件
+                <input class="test" type="text" id="bb_email">
+                <span class="ckbb_email check2"></sapn>
+            </p>
 
+            <p class="list">
+                联系地址
+                <input class="test" type="text" id="bb_address">
+            </p>
+        </div>
 
-            <div class="center">
-                <p class="title bb">被保人信息</p>
-                <form action="/php/addcard.php" method="GET">
-                    <p class="list bb">
-                        姓名
-                        <input class="test bb" type="text" name="name">
-                    </p>
-                    <p class="list">
-                        身份证
-                        <select name="type" id="" class="bb">
-                            <option value="居民身份证">居民身份证</option>
-                            <option value="军官证">军官证</option>
-                            <option value="港澳台大陆通行证">港澳台大陆通行证</option>
-                            <option value="外国人永久居留证">外国人永久居留证</option>
-                            <option value="护照">护照</option>
-                        </select>
-                    </p>
-                    <p class="list">
-                        性别
-                        <select name="gender">
-                            <option value="m">男</option>
-                            <option value="f">女</option>
-                        </select>
-                    </p>
-                    <p class="list">
-                        出生日期
-                        <input class="test bb" type="date" name="data">
-                    </p>
-                    <p class="list">
-                        证件号码
-                        <input class="test bb" type="text" name="perid">
-                    </p>
-                    <p class="list">
-                        电子邮件
-                        <input class="test bb" type="text" name="email">
-                    </p>
-                    <p class="list">
-                        手机号码
-                        <input class="test bb" type="text" name="pho">
-                    </p>
-                    <p class="list">
-                        联系地址
-                        <input class="test bb" type="text" name="address">
-                    </p>
+        <div class="center foot">
+            <p class="title">受益人信息</p>
+            <p class="benefit">受益人为法定继承人</p>
+            <p class="time">生效有效期选择：<span class="start">2020-07-10</span>至<span class="end">2020-11-10</span></p>
+            <p><span>生效时期</span> <input type="text" id="dateSelectorTwo" placeholder="请填写：xxxx-xx-xx">
+                <button type="button" id="dateShowBtn">选择日期</button></p>
 
-                </form>
+            <div class="but more">
+                下一步
             </div>
-
-            <div class="center foot">
-                <p class="title">受益人信息</p>
-                <p class="benefit">受益人为法定继承人</p>
-                <p class="time">生效有效期选择：<span class="start">2020-07-10</span>至<span class="end">2020-11-10</span></p>
-                <p><span>生效时期</span></p>
-
-                <div class="but more">
-                    下一步
-                </div>
-                <div class="but exit">
-                    安全退出
-                </div>
+            <div class="but exit">
+                安全退出
             </div>
         </div>
+    </div>
 </body>
 
 <script>
+    //日期插件
+    // new Mdate("dateShowBtn", {
+    //     acceptId: "dateSelectorTwo",
+    //     beginYear: "2002",
+    //     beginMonth: "10",
+    //     beginDay: "24",
+    //     endYear: "2017",
+    //     endMonth: "1",
+    //     endDay: "1",
+    //     format: "-"
+    // })
     var id = sessionStorage.getItem('id');
     var cardidDOM = document.querySelector(".cardid");
     cardidDOM.textContent = id;
+    var typeDOM = document.querySelector("#type");
+    var rg = new RegQ();
+    var relationDOM = document.querySelector("#relation");
+    var tbnameflag = 0;
+    var bbnameflag = 0;
+
+    var tbidflag = 0;
+    var bbidflag = 0;
+
+    var tbemailflag = 0;
+    var bbemailag = 0;
+
+    var tbnameflag = 0;
+    var tbphoflag = 0;
+
+    var bbphoflag = 0;
+    var tbnameflag = 0;
+
+    //选取关系选择中的内容
+    relationDOM.addEventListener("change", function () {
+        // var index = relationDOM.selectedIndex
+        // let retype = relationDOM.options[index].value;
+        // console.log(retype);
+        let retype = relationDOM.value;
+        console.log(retype);
+        if (retype == "self") {
+            //复制姓名
+            copy("#tb_name", "#bb_name");
+
+            //复制卡号
+            copy("#tb_perid", "#bb_perid");
+
+            //复制证件类型
+            copy("#tb_type", "#bb_type");
+
+            //复制性别
+            copy("#tb_gender", "#bb_gender");
+
+            //复制生日
+            copy("#tb_date", "#bb_date");
+
+            //复制电子邮件
+            copy("#tb_email", "#bb_email")
+
+            //复制手机号码
+            copy("#tb_pho", "#bb_pho")
+
+            //复制手机号码
+            copy("#tb_address", "#bb_address")
+        }
+    })
+
+
+    //判断姓名合适是否正确
+
+    ckpername("#tb_name", ".cktb_name");
+    ckpername("#bb_name", ".ckbb_name");
+
+    //判断证件号码是否符合规范
+    ckperid("#tb_perid", ".cktb_perid");
+    ckperid2("#bb_perid", ".ckbb_perid");
+
+    //判断电子邮件是否符合规范
+    ckemail("#tb_email", ".cktb_email");
+    ckemail("#bb_email", ".ckbb_email");
+
+    //判断手机号码是否符合规范
+    ckpho("#tb_pho", ".cktb_pho");
+    ckpho("#bb_pho", ".ckbb_pho");
+
+
+
+
+    function ckpername(option, option2) {
+        let flag = 0;
+        var tb_nameDOM = document.querySelector(option);
+        var cktb_nameDOM = document.querySelector(option2);
+        tb_nameDOM.addEventListener('blur', function () {
+            let tbname = tb_nameDOM.value;
+            if (rg.pername(tbname)) {
+                flag += 1;
+
+            } else if (rg.nonull(tbname)) {
+                cktb_nameDOM.innerHTML = "";
+                flag = 0;
+            } else {
+                cktb_nameDOM.innerHTML = `<span class="idFalse">😥格式错误</span>`;
+                flag = 0;
+            }
+        })
+        tb_nameDOM.addEventListener('focus', function () {
+            cktb_nameDOM.innerHTML = "";
+        })
+        console.log(flag);
+        return flag;
+    }
+
+    function ckemail(option, option2) {
+        let flag = 0;
+        var tb_nameDOM = document.querySelector(option);
+        var cktb_nameDOM = document.querySelector(option2);
+        tb_nameDOM.addEventListener('blur', function () {
+            let tbname = tb_nameDOM.value;
+            if (rg.mail(tbname)) {
+                flag = 1;
+            } else if (rg.nonull(tbname)) {
+                cktb_nameDOM.innerHTML = "";
+                flag = 0;
+            } else {
+                cktb_nameDOM.innerHTML = `<span class="idFalse">😥邮件格式错误</span>`;
+                flag = 0;
+            }
+        })
+        tb_nameDOM.addEventListener('focus', function () {
+            cktb_nameDOM.innerHTML = "";
+        })
+        return flag;
+    }
+
+    function ckperid(option, option2) {
+        let flag = 0;
+        var tb_nameDOM = document.querySelector(option);
+        var cktb_nameDOM = document.querySelector(option2);
+        tb_nameDOM.addEventListener('blur', function () {
+            let tbname = tb_nameDOM.value;
+            if (rg.idcard(tbname)) {
+                let tbperid = document.querySelector("#tb_perid").value;
+                let idsex = tbperid.slice(16, 17);
+                let iddate = tbperid.slice(6, 10) + "-" + tbperid.slice(10, 12) + "-" + tbperid.slice(12, 14);
+                if (idsex % 2 == 0) {
+                    document.querySelector('#tb_gender').value = "f";
+                }
+                document.querySelector("#tb_date").value = iddate;
+
+            } else if (rg.nonull(tbname)) {
+                cktb_nameDOM.innerHTML = "";
+                flag = 0;
+            } else {
+                cktb_nameDOM.innerHTML = `<span class="idFalse">😥身份证格式错误</span>`;
+                flag = 0;
+            }
+        })
+        tb_nameDOM.addEventListener('focus', function () {
+            cktb_nameDOM.innerHTML = "";
+        })
+        return flag;
+    }
+
+    function ckperid2(option, option2) {
+        let flag = 0;
+        console.log(1);
+        var tb_nameDOM = document.querySelector(option);
+        var cktb_nameDOM = document.querySelector(option2);
+        tb_nameDOM.addEventListener('blur', function () {
+            let tbname = tb_nameDOM.value;
+            if (rg.idcard(tbname)) {
+                let bbperid = document.querySelector(option).value;
+                console.log(bbperid.slice(16, 17));
+                let idsex = bbperid.slice(16, 17);
+                let iddate = bbperid.slice(6, 10) + "-" + bbperid.slice(10, 12) + "-" + bbperid.slice(12, 14);
+                if (idsex % 2 == 0) {
+                    document.querySelector('#bb_gender').value = "f";
+                }
+                document.querySelector("#bb_date").value = iddate;
+
+            } else if (rg.nonull(tbname)) {
+                cktb_nameDOM.innerHTML = "";
+                flag = 0;
+            } else {
+                cktb_nameDOM.innerHTML = `<span class="idFalse">😥身份证格式错误</span>`;
+                flag = 0;
+            }
+        })
+        tb_nameDOM.addEventListener('focus', function () {
+            cktb_nameDOM.innerHTML = "";
+        })
+        return flag;
+    }
+
+
+    function ckpho(option, option2) {
+        let flag = 0;
+        var tb_nameDOM = document.querySelector(option);
+        var cktb_nameDOM = document.querySelector(option2);
+        tb_nameDOM.addEventListener('blur', function () {
+            let tbname = tb_nameDOM.value;
+            if (rg.phone(tbname)) {
+                flag = 1;
+                let percarid = document.querySelector("#tb_perid").value;
+                console.log(percarid);
+            } else if (rg.nonull(tbname)) {
+                cktb_nameDOM.innerHTML = "";
+                flag = 0;
+            } else {
+                cktb_nameDOM.innerHTML = `<span class="idFalse">😥手机号格式错误</span>`;
+                flag = 0;
+            }
+        })
+        tb_nameDOM.addEventListener('focus', function () {
+            cktb_nameDOM.innerHTML = "";
+        })
+        return flag;
+    }
+
+    function copy(option, option2) {
+        let name = document.querySelector(option).value;
+        document.querySelector(option2).value = name;
+        document.querySelector(option2).disabled = "true";
+
+    }
+
+
+    //点击下一步 先检测数据是否规范
+    var moreDOM = document.querySelector(".more");
+    moreDOM.addEventListener("click", function () {
+        console.log(ckpername("#tb_name", ".cktb_name"));
+        console.log(ckperid("#tb_perid", ".cktb_perid"));
+        console.log(ckemail("#tb_email", ".cktb_email"));
+        // if (ckpername("#tb_name", ".cktb_name") == 0) {
+        //     document.querySelector("#tb_name").scrollIntoView();
+        //     return;
+        // }
+        // if (ckperid("#tb_perid", ".cktb_perid" == 0)) {
+        //     document.querySelector("#tb_perid").scrollIntoView();
+        //     return;
+        // }
+        // if (ckemail("#tb_email", ".cktb_email") == 0) {
+        //     document.querySelector("#tb_email").scrollIntoView();
+        //     return;
+        // }
+        // if (!ckpho("#tb_pho", ".cktb_pho") == 0) {
+        //     document.querySelector("#tb_pho").scrollIntoView();
+        //     return;
+        // } else {
+        let tb_name = document.querySelector("#tb_name").value;
+        let tb_type = document.querySelector("#tb_type").value;
+        let tb_gender = document.querySelector("#bb_gender").value;
+        let tb_date = document.querySelector("#tb_date").value;
+        let tb_perid = document.querySelector("#tb_perid").value;
+        let tb_email = document.querySelector("#tb_email").value;
+        let tb_pho = document.querySelector("#tb_pho").value;
+        let tb_address = document.querySelector("#tb_address").value;
+        let bb_name = document.querySelector("#bb_name").value;
+        let bb_type = document.querySelector("#bb_type").value;
+        let bb_gender = document.querySelector("#bb_gender").value;
+        let bb_date = document.querySelector("#bb_date").value;
+        let bb_perid = document.querySelector("#bb_perid").value;
+        let bb_email = document.querySelector("#bb_email").value;
+        let bb_pho = document.querySelector("#bb_pho").value;
+        let bb_address = document.querySelector("#bb_address").value;
+        myajax({
+            "url": "/php/addId.php",
+            "arg": {
+                "id": id,
+                "tb_name": tb_name,
+                "tb_type": tb_type,
+                "tb_gender": tb_gender,
+                "tb_date": tb_date,
+                "tb_perid": tb_perid,
+                "tb_email": tb_email,
+                "tb_pho": tb_pho,
+                "tb_address": tb_address,
+
+                "bb_name": bb_name,
+                "bb_type": bb_type,
+                "bb_gender": bb_gender,
+                "bb_date": bb_date,
+                "bb_perid": bb_perid,
+                "bb_email": bb_email,
+                "bb_pho": bb_pho,
+                "bb_address": bb_address,
+            },
+            "success": function (re) {
+                if (re.code == 1) {
+                    window.location.href = `success.html`;
+                } else {
+
+                }
+            }
+
+        });
+
+    })
 </script>
 
 </html>

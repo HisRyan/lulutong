@@ -82,7 +82,12 @@ function RegQ() {
         var isMath = /^\s*$/g.test(str);
         return isMath;
     }
-
+    //用户名
+    this.pername = function (str) {
+        //用户名由中文字符构成
+        var isMatch = /^[\u4e00-\u9fa5]{2,8}$/.test(str);
+        return isMatch;
+    }
 
 
 }

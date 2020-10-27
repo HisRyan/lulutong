@@ -110,7 +110,7 @@
         var pwd = passWordDOM.value;
         var code = codeDOM.value;
         //数据存入session
-
+        sessionStorage.setItem('id', id);
         if (flagId == 0) {
             checkIdDOM.innerHTML = `<span class="idFalse">😃请输入正确的卡号</span>`;
             return;

@@ -21,7 +21,8 @@
   height: 40px;
   padding: 10px 0;
   line-height: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  position: relative;
 }
 .center .listName {
   margin-right: 90px;
@@ -79,4 +80,72 @@
 .cardid {
   color: orange;
   margin-left: 20px;
+}
+.demoBox {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 8px 8px 20px;
+}
+
+.demoBox > p {
+  padding-top: 10px;
+}
+
+.demoBox > ol {
+  padding-top: 15px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.demoBox > ol > li {
+  padding-top: 10px;
+  margin-left: 7%;
+}
+
+.demoBox > ol > li > span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+}
+
+.demo {
+  height: 35px;
+  margin: 15px 0;
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+}
+
+.demo > input {
+  display: block;
+  border: 0;
+  border-radius: 3px;
+  padding: 0 8px;
+  height: 100%;
+  flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  font-size: 14px;
+}
+
+.demo > button {
+  background-color: #00c599;
+  color: #fff;
+  border: 0;
+  height: 100%;
+  margin-left: 8px;
+  padding: 0 15px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+.check2 {
+  color: red;
+  position: absolute;
+  bottom: -40px;
+  font-size: 14px;
+  left: 10px;
+}
+.idTrue {
+  color: #008000;
 }

@@ -13,19 +13,26 @@
     <div class="all">
 
     </div>
+    <div class="but more" id="more">
+        查看理赔信息
+    </div>
+    <div class="but exit">
+        安全退出
+    </div>
 </body>
 <script>
-    var shopage = getUrlArg();
     var currid = sessionStorage.getItem('id'); //获取session中的数据
     console.log(currid);
     var allDOM = document.querySelector('.all');
     showMessage(currid);
 
     function showMessage(index) {
+
         myajax({
             "url": "/php/message.php",
             "arg": {
-                "classid": index
+                "classid": index,
+                "act": "stid"
             },
             "success": function (re) {
                 if (re.state === true) {
@@ -120,76 +127,23 @@
                 </li>
                 <li>
                     <p>受益人</p>
-                    <div class="hide hide3">
-                        <p>投保人姓名
-                            <span>111</span>
-                        </p>
-                        <p>证件
-                            <span>222</span>
-                        </p>
-                        <p>证件号码
-                            <span>333</span>
-                        </p>
-                        <p>性别
-                            <span>444</span>
-                        </p>
-                        <p>出生日期
-                            <span>555</span>
-                        </p>
-                        <p>电子邮箱
-                            <span>666</span>
-                        </p>
-                        <p>手机号
-                            <span>777</span>
-                        </p>
-                        <p>地址
-                            <span>888</span>
-                        </p>
-                    </div>
+                     
                 </li>
             </ul>
         </div>
-        <div class="but more">
-            查看理赔信息
-        </div>
-        <div class="but exit">
-            安全退出
-        </div>`;
+       `;
                     allDOM.innerHTML += tmp;
                 }
             }
         });
     }
 
-
-
-
-
-
-
-
-
-
-    function getUrlArg() {
-        let args = {};
-        let url = window.location.href;
-        //判断是否有问号
-        if (url.includes("?")) {
-            let argStr = url.split("?")[1]; //"page=2&pagesize=5"
-            let argArr = argStr.split("&"); //["page=2","pagesize=5"]
-            for (let i = 0; i < argArr.length; i++) {
-                //判断是否有等号
-                if (argArr[i].includes("=")) {
-                    let argItem = argArr[i].split("=");
-                    //判断值是否为空
-                    let keyName = argItem[0];
-                    let keyValue = argItem[1];
-                    args[keyName] = keyValue; //关键语句
-                }
-            }
-        }
-        return args;
-    }
+    var moreDOM = document.querySelector("#more");
+    console.log(moreDOM);
+    moreDOM.addEventListener("click", function () {
+        console.log(1);
+        window.location.href = "staff.html"
+    })
 </script>
 
 </html>

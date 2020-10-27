@@ -1,3 +1,4 @@
+//TODO:dwd
 var serviceDOM = document.querySelector('.service');
 var menuDOM = document.querySelector('.menu');
 var flag = 0;

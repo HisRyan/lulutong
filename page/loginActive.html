@@ -64,6 +64,9 @@
         <input class="go" type="button" value="前往" onclick="goadd()">
         <input class="exit" type="button" value="取消" onclick="exit()">
     </div>
+
+    <!-- 登录成功提示的信息 -->
+    <div class="successgo">登录成功</div>
 </body>
 <script>
     var nextDOM = document.querySelector('.next');
@@ -74,6 +77,7 @@
     var codeDOM = document.querySelector(".code");
     var checkIdDOM = document.querySelector('.checkId');
     var hintDOM = document.querySelector('.hint');
+    var successgoDOM = document.querySelector('.success');
     var rg = new RegQ();
     //判断登录框是否有数据
     var flagId = 0;
@@ -144,8 +148,10 @@
                     "code": code
                 },
                 "success": function (re) {
+                    console.log(re.code);
                     if (re.code == 0) {
-                        window.location.href = `addId.html`;
+
+                        window.location.href = "clause.html";
                     } else {
                         choose(re.code);
                         console.log(re.code);
