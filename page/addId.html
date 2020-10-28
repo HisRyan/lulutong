@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="/Mdate/needcss/Mdate.css">
     <script src="/js/regular.js"></script>
     <script src="/js/ajax.js"></script>
-    <!-- <script src="/Mdate/iScroll.js"></script>
-    <script src="/Mdate/Mdate.js"></script> -->
+    <script src="/Mdate/iScroll.js"></script>
+    <script src="/Mdate/Mdate.js"></script>
 
 
 </head>
@@ -40,7 +40,6 @@
                 </li>
             </ul>
         </div>
-
 
         <div class="titleId">
             <span>卡号:</span><span class="cardid"></span>
@@ -166,318 +165,397 @@
         <div class="center foot">
             <p class="title">受益人信息</p>
             <p class="benefit">受益人为法定继承人</p>
-            <p class="time">生效有效期选择：<span class="start">2020-07-10</span>至<span class="end">2020-11-10</span></p>
-            <p><span>生效时期</span> <input type="text" id="dateSelectorTwo" placeholder="请填写：xxxx-xx-xx">
-                <button type="button" id="dateShowBtn">选择日期</button></p>
-
-            <div class="but more">
-                下一步
-            </div>
-            <div class="but exit">
-                安全退出
+            <p class="time">生效有效期选择：<span class="start"></span>至<span class="end"></span></p>
+            <div class="demoBox">
+                <div class="demo">
+                    <input type="text" id="dateSelectorTwo" placeholder="请选择生效日期" disabled="true">
+                    <button type="button" id="dateShowBtn">选择日期</button>
+                    <span class="cktbtime check3"></sapn>
+                </div>
+                <div class="but more">
+                    下一步
+                </div>
+                <div class="but exit">
+                    安全退出
+                </div>
             </div>
         </div>
-    </div>
 </body>
 
 <script>
-    //日期插件
-    // new Mdate("dateShowBtn", {
-    //     acceptId: "dateSelectorTwo",
-    //     beginYear: "2002",
-    //     beginMonth: "10",
-    //     beginDay: "24",
-    //     endYear: "2017",
-    //     endMonth: "1",
-    //     endDay: "1",
-    //     format: "-"
-    // })
-    var id = sessionStorage.getItem('id');
-    var cardidDOM = document.querySelector(".cardid");
-    cardidDOM.textContent = id;
-    var typeDOM = document.querySelector("#type");
-    var rg = new RegQ();
-    var relationDOM = document.querySelector("#relation");
-    var tbnameflag = 0;
-    var bbnameflag = 0;
+    console.log(sessionStorage.getItem('id'));
+    if (sessionStorage.getItem('id')) {
+        var startDOM = document.querySelector(".start");
+        var endDOM = document.querySelector(".end");
 
-    var tbidflag = 0;
-    var bbidflag = 0;
-
-    var tbemailflag = 0;
-    var bbemailag = 0;
-
-    var tbnameflag = 0;
-    var tbphoflag = 0;
-
-    var bbphoflag = 0;
-    var tbnameflag = 0;
-
-    //选取关系选择中的内容
-    relationDOM.addEventListener("change", function () {
-        // var index = relationDOM.selectedIndex
-        // let retype = relationDOM.options[index].value;
-        // console.log(retype);
-        let retype = relationDOM.value;
-        console.log(retype);
-        if (retype == "self") {
-            //复制姓名
-            copy("#tb_name", "#bb_name");
-
-            //复制卡号
-            copy("#tb_perid", "#bb_perid");
-
-            //复制证件类型
-            copy("#tb_type", "#bb_type");
-
-            //复制性别
-            copy("#tb_gender", "#bb_gender");
-
-            //复制生日
-            copy("#tb_date", "#bb_date");
-
-            //复制电子邮件
-            copy("#tb_email", "#bb_email")
-
-            //复制手机号码
-            copy("#tb_pho", "#bb_pho")
-
-            //复制手机号码
-            copy("#tb_address", "#bb_address")
+        //获取当前日期往后count天的日期
+        function GetDateStr(count) {
+            var date = new Date();
+            date.setDate(date.getDate() + count);
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var d = date.getDate();
+            var startTime = y + "-" + m + "-" + d;
+            return startTime;
         }
-    })
+        startDOM.textContent = GetDateStr(3);
+        endDOM.textContent = GetDateStr(33)
 
+        //日期插件
+        new Mdate("dateShowBtn", {
+            acceptId: "dateSelectorTwo",
+            beginYear: GetDateStr(3).split("-")[0],
+            beginMonth: GetDateStr(3).split("-")[1],
+            beginDay: GetDateStr(3).split("-")[2],
+            endYear: GetDateStr(33).split("-")[0],
+            endMonth: GetDateStr(33).split("-")[1],
+            endDay: GetDateStr(33).split("-")[2],
+            format: "-"
+        })
+        var id = sessionStorage.getItem('id');
+        var cardidDOM = document.querySelector(".cardid");
+        cardidDOM.textContent = id;
+        var typeDOM = document.querySelector("#type");
+        var rg = new RegQ();
+        var relationDOM = document.querySelector("#relation");
 
-    //判断姓名合适是否正确
+        //选取关系选择中的内容
+        relationDOM.addEventListener("change", function () {
+            // var index = relationDOM.selectedIndex
+            // let retype = relationDOM.options[index].value;
+            // console.log(retype);
+            let retype = relationDOM.value;
+            if (retype == "self") {
+                //复制姓名
+                copy("#tb_name", "#bb_name");
 
-    ckpername("#tb_name", ".cktb_name");
-    ckpername("#bb_name", ".ckbb_name");
+                //复制卡号
+                copy("#tb_perid", "#bb_perid");
 
-    //判断证件号码是否符合规范
-    ckperid("#tb_perid", ".cktb_perid");
-    ckperid2("#bb_perid", ".ckbb_perid");
+                //复制证件类型
+                copy("#tb_type", "#bb_type");
 
-    //判断电子邮件是否符合规范
-    ckemail("#tb_email", ".cktb_email");
-    ckemail("#bb_email", ".ckbb_email");
+                //复制性别
+                copy("#tb_gender", "#bb_gender");
 
-    //判断手机号码是否符合规范
-    ckpho("#tb_pho", ".cktb_pho");
-    ckpho("#bb_pho", ".ckbb_pho");
+                //复制生日
+                copy("#tb_date", "#bb_date");
 
+                //复制电子邮件
+                copy("#tb_email", "#bb_email")
 
+                //复制手机号码
+                copy("#tb_pho", "#bb_pho")
 
-
-    function ckpername(option, option2) {
-        let flag = 0;
-        var tb_nameDOM = document.querySelector(option);
-        var cktb_nameDOM = document.querySelector(option2);
-        tb_nameDOM.addEventListener('blur', function () {
-            let tbname = tb_nameDOM.value;
-            if (rg.pername(tbname)) {
-                flag += 1;
-
-            } else if (rg.nonull(tbname)) {
-                cktb_nameDOM.innerHTML = "";
-                flag = 0;
-            } else {
-                cktb_nameDOM.innerHTML = `<span class="idFalse">😥格式错误</span>`;
-                flag = 0;
+                //复制手机号码
+                copy("#tb_address", "#bb_address")
             }
         })
-        tb_nameDOM.addEventListener('focus', function () {
-            cktb_nameDOM.innerHTML = "";
-        })
-        console.log(flag);
-        return flag;
-    }
-
-    function ckemail(option, option2) {
-        let flag = 0;
-        var tb_nameDOM = document.querySelector(option);
-        var cktb_nameDOM = document.querySelector(option2);
-        tb_nameDOM.addEventListener('blur', function () {
-            let tbname = tb_nameDOM.value;
-            if (rg.mail(tbname)) {
-                flag = 1;
-            } else if (rg.nonull(tbname)) {
-                cktb_nameDOM.innerHTML = "";
-                flag = 0;
-            } else {
-                cktb_nameDOM.innerHTML = `<span class="idFalse">😥邮件格式错误</span>`;
-                flag = 0;
-            }
-        })
-        tb_nameDOM.addEventListener('focus', function () {
-            cktb_nameDOM.innerHTML = "";
-        })
-        return flag;
-    }
-
-    function ckperid(option, option2) {
-        let flag = 0;
-        var tb_nameDOM = document.querySelector(option);
-        var cktb_nameDOM = document.querySelector(option2);
-        tb_nameDOM.addEventListener('blur', function () {
-            let tbname = tb_nameDOM.value;
-            if (rg.idcard(tbname)) {
-                let tbperid = document.querySelector("#tb_perid").value;
-                let idsex = tbperid.slice(16, 17);
-                let iddate = tbperid.slice(6, 10) + "-" + tbperid.slice(10, 12) + "-" + tbperid.slice(12, 14);
-                if (idsex % 2 == 0) {
-                    document.querySelector('#tb_gender').value = "f";
-                }
-                document.querySelector("#tb_date").value = iddate;
-
-            } else if (rg.nonull(tbname)) {
-                cktb_nameDOM.innerHTML = "";
-                flag = 0;
-            } else {
-                cktb_nameDOM.innerHTML = `<span class="idFalse">😥身份证格式错误</span>`;
-                flag = 0;
-            }
-        })
-        tb_nameDOM.addEventListener('focus', function () {
-            cktb_nameDOM.innerHTML = "";
-        })
-        return flag;
-    }
-
-    function ckperid2(option, option2) {
-        let flag = 0;
-        console.log(1);
-        var tb_nameDOM = document.querySelector(option);
-        var cktb_nameDOM = document.querySelector(option2);
-        tb_nameDOM.addEventListener('blur', function () {
-            let tbname = tb_nameDOM.value;
-            if (rg.idcard(tbname)) {
-                let bbperid = document.querySelector(option).value;
-                console.log(bbperid.slice(16, 17));
-                let idsex = bbperid.slice(16, 17);
-                let iddate = bbperid.slice(6, 10) + "-" + bbperid.slice(10, 12) + "-" + bbperid.slice(12, 14);
-                if (idsex % 2 == 0) {
-                    document.querySelector('#bb_gender').value = "f";
-                }
-                document.querySelector("#bb_date").value = iddate;
-
-            } else if (rg.nonull(tbname)) {
-                cktb_nameDOM.innerHTML = "";
-                flag = 0;
-            } else {
-                cktb_nameDOM.innerHTML = `<span class="idFalse">😥身份证格式错误</span>`;
-                flag = 0;
-            }
-        })
-        tb_nameDOM.addEventListener('focus', function () {
-            cktb_nameDOM.innerHTML = "";
-        })
-        return flag;
-    }
 
 
-    function ckpho(option, option2) {
-        let flag = 0;
-        var tb_nameDOM = document.querySelector(option);
-        var cktb_nameDOM = document.querySelector(option2);
-        tb_nameDOM.addEventListener('blur', function () {
-            let tbname = tb_nameDOM.value;
-            if (rg.phone(tbname)) {
-                flag = 1;
-                let percarid = document.querySelector("#tb_perid").value;
-                console.log(percarid);
-            } else if (rg.nonull(tbname)) {
-                cktb_nameDOM.innerHTML = "";
-                flag = 0;
-            } else {
-                cktb_nameDOM.innerHTML = `<span class="idFalse">😥手机号格式错误</span>`;
-                flag = 0;
-            }
-        })
-        tb_nameDOM.addEventListener('focus', function () {
-            cktb_nameDOM.innerHTML = "";
-        })
-        return flag;
-    }
+        //判断姓名合适是否正确
 
-    function copy(option, option2) {
-        let name = document.querySelector(option).value;
-        document.querySelector(option2).value = name;
-        document.querySelector(option2).disabled = "true";
+        ckpername("#tb_name", ".cktb_name");
+        ckpername("#bb_name", ".ckbb_name");
 
-    }
+        //判断证件号码是否符合规范
+        ckperid("#tb_perid", ".cktb_perid");
+        ckperid2("#bb_perid", ".ckbb_perid");
+
+        //判断电子邮件是否符合规范
+        ckemail("#tb_email", ".cktb_email");
+        ckemail("#bb_email", ".ckbb_email");
+
+        //判断手机号码是否符合规范
+        ckpho("#tb_pho", ".cktb_pho");
+        ckpho("#bb_pho", ".ckbb_pho");
 
 
-    //点击下一步 先检测数据是否规范
-    var moreDOM = document.querySelector(".more");
-    moreDOM.addEventListener("click", function () {
-        console.log(ckpername("#tb_name", ".cktb_name"));
-        console.log(ckperid("#tb_perid", ".cktb_perid"));
-        console.log(ckemail("#tb_email", ".cktb_email"));
-        // if (ckpername("#tb_name", ".cktb_name") == 0) {
-        //     document.querySelector("#tb_name").scrollIntoView();
-        //     return;
-        // }
-        // if (ckperid("#tb_perid", ".cktb_perid" == 0)) {
-        //     document.querySelector("#tb_perid").scrollIntoView();
-        //     return;
-        // }
-        // if (ckemail("#tb_email", ".cktb_email") == 0) {
-        //     document.querySelector("#tb_email").scrollIntoView();
-        //     return;
-        // }
-        // if (!ckpho("#tb_pho", ".cktb_pho") == 0) {
-        //     document.querySelector("#tb_pho").scrollIntoView();
-        //     return;
-        // } else {
-        let tb_name = document.querySelector("#tb_name").value;
-        let tb_type = document.querySelector("#tb_type").value;
-        let tb_gender = document.querySelector("#bb_gender").value;
-        let tb_date = document.querySelector("#tb_date").value;
-        let tb_perid = document.querySelector("#tb_perid").value;
-        let tb_email = document.querySelector("#tb_email").value;
-        let tb_pho = document.querySelector("#tb_pho").value;
-        let tb_address = document.querySelector("#tb_address").value;
-        let bb_name = document.querySelector("#bb_name").value;
-        let bb_type = document.querySelector("#bb_type").value;
-        let bb_gender = document.querySelector("#bb_gender").value;
-        let bb_date = document.querySelector("#bb_date").value;
-        let bb_perid = document.querySelector("#bb_perid").value;
-        let bb_email = document.querySelector("#bb_email").value;
-        let bb_pho = document.querySelector("#bb_pho").value;
-        let bb_address = document.querySelector("#bb_address").value;
-        myajax({
-            "url": "/php/addId.php",
-            "arg": {
-                "id": id,
-                "tb_name": tb_name,
-                "tb_type": tb_type,
-                "tb_gender": tb_gender,
-                "tb_date": tb_date,
-                "tb_perid": tb_perid,
-                "tb_email": tb_email,
-                "tb_pho": tb_pho,
-                "tb_address": tb_address,
 
-                "bb_name": bb_name,
-                "bb_type": bb_type,
-                "bb_gender": bb_gender,
-                "bb_date": bb_date,
-                "bb_perid": bb_perid,
-                "bb_email": bb_email,
-                "bb_pho": bb_pho,
-                "bb_address": bb_address,
-            },
-            "success": function (re) {
-                if (re.code == 1) {
-                    window.location.href = `success.html`;
+
+        function ckpername(option, option2) {
+            var flag;
+            var tb_nameDOM = document.querySelector(option);
+            var cktb_nameDOM = document.querySelector(option2);
+            tb_nameDOM.addEventListener('blur', function () {
+                let tbname = tb_nameDOM.value;
+                if (rg.pername(tbname)) {
+                    flag = 1;
+                } else if (rg.nonull(tbname)) {
+                    cktb_nameDOM.innerHTML = "";
+                    flag = 0;
                 } else {
-
+                    cktb_nameDOM.innerHTML = `<span class="idFalse">😥格式错误</span>`;
+                    flag = 0;
                 }
+            })
+            tb_nameDOM.addEventListener('focus', function () {
+                cktb_nameDOM.innerHTML = "";
+            })
+            console.log(flag);
+            return flag
+        }
+
+        function ckemail(option, option2) {
+            let flag = 0;
+            var tb_nameDOM = document.querySelector(option);
+            var cktb_nameDOM = document.querySelector(option2);
+            tb_nameDOM.addEventListener('blur', function () {
+                let tbname = tb_nameDOM.value;
+                if (rg.mail(tbname)) {
+                    flag = 1;
+                } else if (rg.nonull(tbname)) {
+                    cktb_nameDOM.innerHTML = "";
+                    flag = 0;
+                } else {
+                    cktb_nameDOM.innerHTML = `<span class="idFalse">😥邮件格式错误</span>`;
+                    flag = 0;
+                }
+            })
+            tb_nameDOM.addEventListener('focus', function () {
+                cktb_nameDOM.innerHTML = "";
+            })
+            return flag;
+        }
+
+        function ckperid(option, option2) {
+            let flag = 0;
+            var tb_nameDOM = document.querySelector(option);
+            var cktb_nameDOM = document.querySelector(option2);
+            tb_nameDOM.addEventListener('blur', function () {
+                let tbname = tb_nameDOM.value;
+                if (rg.idcard(tbname)) {
+                    let tbperid = document.querySelector("#tb_perid").value;
+                    let idsex = tbperid.slice(16, 17);
+                    let iddate = tbperid.slice(6, 10) + "-" + tbperid.slice(10, 12) + "-" + tbperid.slice(12,
+                        14);
+                    if (idsex % 2 == 0) {
+                        document.querySelector('#tb_gender').value = "f";
+                    }
+                    document.querySelector("#tb_date").value = iddate;
+
+                } else if (rg.nonull(tbname)) {
+                    cktb_nameDOM.innerHTML = "";
+                    flag = 0;
+                } else {
+                    cktb_nameDOM.innerHTML = `<span class="idFalse">😥身份证格式错误</span>`;
+                    flag = 0;
+                }
+            })
+            tb_nameDOM.addEventListener('focus', function () {
+                cktb_nameDOM.innerHTML = "";
+            })
+            return flag;
+        }
+
+        function ckperid2(option, option2) {
+            let flag = 0;
+            var tb_nameDOM = document.querySelector(option);
+            var cktb_nameDOM = document.querySelector(option2);
+            tb_nameDOM.addEventListener('blur', function () {
+                let tbname = tb_nameDOM.value;
+                if (rg.idcard(tbname)) {
+                    let bbperid = document.querySelector(option).value;
+                    console.log(bbperid.slice(16, 17));
+                    let idsex = bbperid.slice(16, 17);
+                    let iddate = bbperid.slice(6, 10) + "-" + bbperid.slice(10, 12) + "-" + bbperid.slice(12,
+                        14);
+                    if (idsex % 2 == 0) {
+                        document.querySelector('#bb_gender').value = "f";
+                    }
+                    document.querySelector("#bb_date").value = iddate;
+
+                } else if (rg.nonull(tbname)) {
+                    cktb_nameDOM.innerHTML = "";
+                    flag = 0;
+                } else {
+                    cktb_nameDOM.innerHTML = `<span class="idFalse">😥身份证格式错误</span>`;
+                    flag = 0;
+                }
+            })
+            tb_nameDOM.addEventListener('focus', function () {
+                cktb_nameDOM.innerHTML = "";
+            })
+            return flag;
+        }
+
+
+        function ckpho(option, option2) {
+            let flag = 0;
+            var tb_nameDOM = document.querySelector(option);
+            var cktb_nameDOM = document.querySelector(option2);
+            tb_nameDOM.addEventListener('blur', function () {
+                let tbname = tb_nameDOM.value;
+                if (rg.phone(tbname)) {
+                    flag = 1;
+                    let percarid = document.querySelector("#tb_perid").value;
+                    console.log(percarid);
+                } else if (rg.nonull(tbname)) {
+                    cktb_nameDOM.innerHTML = "";
+                    flag = 0;
+                } else {
+                    cktb_nameDOM.innerHTML = `<span class="idFalse">😥手机号格式错误</span>`;
+                    flag = 0;
+                }
+            })
+            tb_nameDOM.addEventListener('focus', function () {
+                cktb_nameDOM.innerHTML = "";
+            })
+            return flag;
+        }
+
+        function copy(option, option2) {
+            let name = document.querySelector(option).value;
+            document.querySelector(option2).value = name;
+            document.querySelector(option2).disabled = "true";
+
+        }
+        let tbtime = document.querySelector("#dateSelectorTwo").value;
+
+
+        //点击下一步 先检测数据是否规范
+        var moreDOM = document.querySelector(".more");
+        moreDOM.addEventListener("click", function () {
+            let tb_name = document.querySelector("#tb_name").value;
+            let tb_type = document.querySelector("#tb_type").value;
+            let tb_gender = document.querySelector("#bb_gender").value;
+            let tb_date = document.querySelector("#tb_date").value;
+            let tb_perid = document.querySelector("#tb_perid").value;
+            let tb_email = document.querySelector("#tb_email").value;
+            let tb_pho = document.querySelector("#tb_pho").value;
+            let tb_address = document.querySelector("#tb_address").value;
+            let bb_name = document.querySelector("#bb_name").value;
+            let bb_type = document.querySelector("#bb_type").value;
+            let bb_gender = document.querySelector("#bb_gender").value;
+            let bb_date = document.querySelector("#bb_date").value;
+            let bb_perid = document.querySelector("#bb_perid").value;
+            let bb_email = document.querySelector("#bb_email").value;
+            let bb_pho = document.querySelector("#bb_pho").value;
+            let bb_address = document.querySelector("#bb_address").value;
+            let tbtime = document.querySelector("#dateSelectorTwo").value;
+            //是否非法访问
+            if (!sessionStorage.getItem('id')) {
+                cardidDOM.textContent = "非法访问";
+                return;
+            }
+            //投保人名字必须符合规范且不能为空
+            if (!rg.pername(tb_name)) {
+                window.scrollTo(0, "#tb_name".offsetTop);
+                if (rg.nonull(tb_name)) {
+                    let link = document.querySelector(".cktb_name");
+                    link.innerHTML = `<span>姓名不能为空</span>`;
+                }
+                return;
+            }
+            //投保人证件号必须符合规范且不能为空
+            if (!rg.idcard(tb_perid)) {
+                window.scrollTo(0, "#tb_perid".offsetTop);
+                if (rg.nonull(tb_perid)) {
+                    let link = document.querySelector(".cktb_perid");
+                    link.innerHTML = `<span>证件号不能为空</span>`;
+                }
+                return;
+            }
+            //投保人手机号必须符合规范且不能为空
+            if (!rg.phone(tb_pho)) {
+                window.scrollTo(0, "#tb_pho".offsetTop);
+                if (rg.nonull(tb_pho)) {
+                    let link = document.querySelector(".cktb_pho");
+                    link.innerHTML = `<span>手机号不能为空</span>`;
+                }
+                return;
+            }
+            //如果用户输入投保人邮箱必须符合规范
+            if (!rg.mail(tb_email) && !rg.nonull(tb_email)) {
+                let _id = document.querySelector("#tb_email");
+                window.scrollTo(1000, _id.offsetTop);
+                return;
             }
 
-        });
+            //被保人名字必须符合规范且不能为空
+            if (!rg.pername(bb_name)) {
+                window.location.hash = "#bb_name";
+                if (rg.nonull(bb_name)) {
+                    let link = document.querySelector(".ckbb_name");
+                    link.innerHTML = `<span>姓名不能为空</span>`;
+                }
+                return;
+            }
+            //被保人证件号必须符合规范且不能为空
+            if (!rg.idcard(bb_perid)) {
+                window.scrollTo(500, "#bb_perid".offsetCenter);
+                if (rg.nonull(bb_perid)) {
+                    let link = document.querySelector(".ckbb_perid");
+                    link.innerHTML = `<span>证件号不能为空</span>`;
+                }
+                return;
+            }
+            //被保人手机号必须符合规范且不能为空
+            if (!rg.phone(bb_pho)) {
+                window.scrollTo(0, "#bb_pho".offsetTop);
+                if (rg.nonull(bb_pho)) {
+                    let link = document.querySelector(".ckbb_pho");
+                    link.innerHTML = `<span>手机号不能为空</span>`;
+                }
+                return;
+            }
+            //如果用户输入被保人邮箱必须符合规范
+            if (!rg.mail(bb_email) && !rg.nonull(bb_email)) {
+                window.scrollTo(0, "#bb_email".offsetTop);
+                return;
+            }
+            //必须选择生效日期
+            if (!document.querySelector("#dateSelectorTwo").value) {
+                let link = document.querySelector(".cktbtime");
+                link.innerHTML = `<span>未选择生效日期</span>`;
+                return;
+            }
+            myajax({
+                "url": "/php/addId.php",
+                "arg": {
+                    "id": id,
+                    "tb_name": tb_name,
+                    "tb_type": tb_type,
+                    "tb_gender": tb_gender,
+                    "tb_date": tb_date,
+                    "tb_perid": tb_perid,
+                    "tb_email": tb_email,
+                    "tb_pho": tb_pho,
+                    "tb_address": tb_address,
 
-    })
+                    "bb_name": bb_name,
+                    "bb_type": bb_type,
+                    "bb_gender": bb_gender,
+                    "bb_date": bb_date,
+                    "bb_perid": bb_perid,
+                    "bb_email": bb_email,
+                    "bb_pho": bb_pho,
+                    "bb_address": bb_address,
+                    "tbtime": tbtime,
+                },
+                "success": function (re) {
+                    if (re.code == 1) {
+                        window.location.href = `success.html`;
+                    } else {
+
+                    }
+                }
+
+            });
+
+        })
+
+        var exitDOM = document.querySelector(".exit");
+        exitDOM.addEventListener("click", function () {
+            sessionStorage.clear();
+            window.location.href = "loginActive.html";
+        })
+    } else {
+        var cardidDOM = document.querySelector(".cardid");
+        cardidDOM.textContent = "非法访问";
+        window.location.href = `loginActive.html`;
+    }
+    console.log(1233);
 </script>
 
 </html>

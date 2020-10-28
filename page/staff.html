@@ -2,73 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>理赔信息</title>
-    <link rel="stylesheet" href="/css/staff.css">
-    <script src="/js/ajax.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>理赔信息</title>
+  <link rel="stylesheet" href="/css/staff.css" />
+  <script src="/js/ajax.js"></script>
 </head>
 
 <body>
-    <div class="title">
-        理赔状态列表
-    </div>
-    <div class="id">
-        卡号:<span class="cardid"></span>
-    </div>
-    <div class="message">
-        <ul class="">
+  <div class="title">理赔状态列表</div>
+  <div class="id">卡号:<span class="cardid"></span></div>
+  <div class="message">
+    <ul class=""></ul>
+  </div>
 
-        </ul>
-    </div>
-
-    <div class="but more">
-        查看投保信息
-    </div>
-    <div class="but exit">
-        安全退出
-    </div>
-
+  <div class="but more">查看投保信息</div>
+  <div class="but exit">安全退出</div>
 </body>
 <script>
-    var idDOM = document.querySelector('.id');
-    var listDOM = document.querySelector(".message ul");
-    var butDOM = document.querySelector('.more');
-    console.log(sessionStorage.getItem('id'));
-    var id = sessionStorage.getItem('id');
-    console.log(id);
-    show(id);
+  var idDOM = document.querySelector(".id");
+  var listDOM = document.querySelector(".message ul");
+  var butDOM = document.querySelector(".more");
+  var id = sessionStorage.getItem("id");
+  var cardidDOM = document.querySelector(".cardid");
+  cardidDOM.textContent = id;
+  show(id);
 
-    function show(index) {
-        console.log(index);
-        myajax({
-            "url": "../php/message.php",
-            "arg": {
-                "classid": index,
-                "act": "staff"
-            },
-            "success": function (re) {
-                if (re.code = 1) {
-
-                    console.log(1);
-                    console.log(re.data.length);
-                    var list = "";
-                    for (var i = 0; i < re.data.length; i++) {
-                        list += `<li>
+  function show(index) {
+    console.log(index);
+    myajax({
+      url: "../php/message.php",
+      arg: {
+        classid: index,
+        act: "staff",
+      },
+      success: function (re) {
+        if ((re.code = 1)) {
+          console.log(1);
+          console.log(re.data.length);
+          var list = "";
+          for (var i = 0; i < re.data.length; i++) {
+            list += `<li >
                                    <p>事故原因：<span class="reason">${re.data[i].reason}</span> 状态：<span class="state">${re.data[i].state}</span>  </p>
-                                   
+                                   <a href="detail.html?id=${re.data[i].id}">了解更多</a>
                                    </li> `;
-                    }
-                    console.log(list);
+          }
+          listDOM.innerHTML = list;
+          console.log(listDOM);
+        } else {
+          console.log(23);
+        }
+      },
+    });
+  }
+  var moreDOM = document.querySelector(".more");
+  moreDOM.addEventListener("click", function () {
+    window.location.href = "idMessage.html";
+  });
 
-                    listDOM.innerHTML = list;
-                    console.log(listDOM);
-                } else {
-                    console.log(23);
-                }
-            }
-        });
-    }
+  var exitDOM = document.querySelector(".exit");
+  exitDOM.addEventListener("click", function () {
+    sessionStorage.clear();
+    window.location.href = "loginActive.html";
+  });
+
+  //点击理赔信息显示详情页
 </script>
 
 </html>

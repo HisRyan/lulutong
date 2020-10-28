@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理赔详情页</title>
+    <script src="/js/ajax.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+
+    </div>
+    </div>
+</body>
+<script>
+    var wrapDOM = document.querySelector(".wrap");
+    var shopage = getUrlArg();
+    id = shopage.id;
+    showstaff(id);
+
+    function showstaff(index) {
+        console.log(index);
+        myajax({
+            url: "../php/message.php",
+            arg: {
+                classid: index,
+                act: "staff",
+            },
+            success: function (re) {
+                if ((re.code = 1)) {
+
+                    var list = `<p>卡号 <span class="cardnum">${re.data[0].cardnum}</span></p>
+        <p>受保人姓名 <span class="name"></span></p>
+        <p>受保人联系方式 <span class="pho"></span></p>
+        <p>保险卡信息 <span class="message"></span></p>
+        <p>发生时间 <span class="time"></span></p>
+        <p>处理人 <span class="person"></span></p>
+        <p>事故原因 <span class="reason"></span></p>
+        <p>拒绝原因 <span class="refuse"></span></p>
+        <p>赔付金额<span class="money"></span></p>
+        <p>银行<span class="bank"></span></p>
+        <p>银行账户<span class="bankid"></span></p>
+        <p>状态<span class="state"></span></p>`;
+                    wrapDOM.innerHTML = list;
+                } else {
+                    console.log(23);
+                }
+            },
+        });
+    }
+
+    function getUrlArg() {
+        let args = {};
+
+        let url = window.location.href;
+
+        //判断是否有问号
+        if (url.includes("?")) {
+
+            let argStr = url.split("?")[1]; //"page=2&pagesize=5"
+
+            let argArr = argStr.split("&"); //["page=2","pagesize=5"]
+
+            for (let i = 0; i < argArr.length; i++) {
+
+                //判断是否有等号
+                if (argArr[i].includes("=")) {
+
+                    let argItem = argArr[i].split("=");
+
+                    //判断值是否为空
+
+                    let keyName = argItem[0];
+                    let keyValue = argItem[1];
+
+                    args[keyName] = keyValue; //关键语句
+
+                }
+            }
+
+        }
+
+        return args;
+    }
+</script>
+
+</html>

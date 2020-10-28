@@ -81,9 +81,11 @@
   color: orange;
   margin-left: 20px;
 }
+.demo {
+  position: relative;
+}
 .demoBox {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 5px;
   margin-bottom: 15px;
   padding: 8px 8px 20px;
@@ -143,6 +145,13 @@
   color: red;
   position: absolute;
   bottom: -40px;
+  font-size: 14px;
+  left: 10px;
+}
+.check3 {
+  color: red;
+  position: absolute;
+  bottom: -10px;
   font-size: 14px;
   left: 10px;
 }

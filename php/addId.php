@@ -1,5 +1,6 @@
 <?php
 header("Content-type: text/html; charset=utf-8");
+session_start();
 
    $tb_cardnum=$_GET['id'];
    $tb_name =$_GET['tb_name'];
@@ -19,7 +20,8 @@ header("Content-type: text/html; charset=utf-8");
    $bb_email = $_GET['bb_email'];
    $bb_pho = $_GET['bb_pho'];
    $bb_address= $_GET['bb_address'];
-
+   $tbtime= $_GET['tbtime'];
+   
     //数据库实例
     $dbc = new MySQLi("127.0.0.1","root","root","lh_lulutong");
 
@@ -44,12 +46,12 @@ header("Content-type: text/html; charset=utf-8");
 
 
 
-    $sql = "insert into lh_actcard (cardnum,tb_name,tb_type,tb_card,tb_phone,tb_sex,tb_email,tb_address,tb_birthday,bb_name,bb_type,bb_card,bb_phone,bb_sex,bb_email,bb_address,bb_birthday) values 
+    $sql = "insert into lh_actcard (cardnum,tb_name,tb_type,tb_card,tb_phone,tb_sex,tb_email,tb_address,tb_birthday,bb_name,bb_type,bb_card,bb_phone,bb_sex,bb_email,bb_address,bb_birthday,effecttime) values 
     
-    ('$tb_cardnum','$tb_name','$tb_type','$tb_perid','$tb_pho','$tb_gender','$tb_email','$tb_address','$tb_date','$bb_name','$bb_type','$bb_perid','$bb_pho','$bb_gender','$bb_email','$bb_address','$bb_date')" ;
+    ('$tb_cardnum','$tb_name','$tb_type','$tb_perid','$tb_pho','$tb_gender','$tb_email','$tb_address','$tb_date','$bb_name','$bb_type','$bb_perid','$bb_pho','$bb_gender','$bb_email','$bb_address','$bb_date','$tbtime')" ;
     $result = $dbc->query($sql); 
     
-    $sql2="update lh_card set state=1,statech='已激活' where cardnum='$tb_cardnum'";
+    $sql2="update lh_card set state=1,statech='激活未生效' where cardnum='$tb_cardnum'";
     $retch = $dbc->query($sql2); 
     $re = array(
         "code"=>1,

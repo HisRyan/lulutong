@@ -1,185 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>服务卡登录</title>
-    <link rel="stylesheet" href="/css/homeCard.css">
+    <link rel="stylesheet" href="/css/homeCard.css" />
     <script src="/js/ajax.js"></script>
     <script src="/js/regular.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="wrap">
-        <ul class="plan">
-            <li>
-                <div class="left check">1</div>
-                <div class="right">服务卡登录</div>
-            </li>
-            <li>
-                <div class="left">2</div>
-                <div class="right">查看服务卡信息</div>
-            </li>
-        </ul>
+      <ul class="plan">
+        <li>
+          <div class="left check">1</div>
+          <div class="right">服务卡登录</div>
+        </li>
+        <li>
+          <div class="left">2</div>
+          <div class="right">查看服务卡信息</div>
+        </li>
+      </ul>
     </div>
     <div class="main">
-        <form action="">
-            <div>
-                <p class="checkId"></p>
-                <input class="cardId" type="text" placeholder="卡号">
+      <form action="">
+        <div>
+          <p class="checkId"></p>
+          <input class="cardId" type="text" placeholder="卡号" />
+        </div>
 
-            </div>
+        <div>
+          <p class="checkPwd"></p>
+          <input class="passWord" type="password" placeholder="密码/身份证号" />
+          <img class="pwd" src="/image/eyepwd.png" alt="" />
+        </div>
 
-            <div>
-                <p class="checkPwd"></p>
-                <input class="passWord" type="password" placeholder="密码/身份证号">
-                <img class="pwd" src="/image/eyepwd.png" alt="">
+        <div>
+          <p class="checkCode"></p>
+          <input class="code" type="text" placeholder="验证码" />
+          <img
+            class="imgpwd"
+            src="/php/validatecode.php"
+            alt=""
+            onclick="javascript:this.src ='/php/validatecode.php?tm='+Math.random();"
+          />
+        </div>
 
-            </div>
-
-            <div>
-                <p class="checkCode"></p>
-                <input class="code" type="text" placeholder="验证码">
-                <img class="imgpwd" src="/php/validatecode.php" alt=""
-                    onclick="javascript:this.src ='/php/validatecode.php?tm='+Math.random();">
-
-            </div>
-
-            <input class="next" type="button" name="" id="" value="下一步">
-        </form>
+        <input class="next" type="button" name="" id="" value="下一步" />
+      </form>
     </div>
 
     <!-- 当查询到卡存在但未激活，提示用户是否需要激活 -->
     <div class="hint">
-        <p>此卡未激活，是否前往激活</p>
-        <input class="go" type="button" value="前往" onclick="goadd()">
-        <input class="exit" type="button" value="取消" onclick="exit()">
+      <p>此卡未激活，是否前往激活</p>
+      <input class="go" type="button" value="前往" onclick="goadd()" />
+      <input class="exit" type="button" value="取消" onclick="exit()" />
     </div>
-</body>
-<script>
-    var nextDOM = document.querySelector('.next');
-    var checkPwdDOM = document.querySelector('.checkPwd');
-    var checkCodeDOM = document.querySelector('.checkCode');
-    var cardIdDOM = document.querySelector('.cardId');
-    var passWordDOM = document.querySelector('.passWord');
+  </body>
+  <script>
+    var nextDOM = document.querySelector(".next");
+    var checkPwdDOM = document.querySelector(".checkPwd");
+    var checkCodeDOM = document.querySelector(".checkCode");
+    var cardIdDOM = document.querySelector(".cardId");
+    var passWordDOM = document.querySelector(".passWord");
     var codeDOM = document.querySelector(".code");
-    var checkIdDOM = document.querySelector('.checkId');
-    var hintDOM = document.querySelector('.hint');
+    var checkIdDOM = document.querySelector(".checkId");
+    var hintDOM = document.querySelector(".hint");
     var rg = new RegQ();
     //判断登录框是否有数据
     var flagId = 0;
     var flagPwd = 0;
     var flagLogo = 0;
     //判断卡号是否符合格式
-    cardIdDOM.addEventListener('blur', function () {
-        let id = cardIdDOM.value;
-        if (rg.txqq(id)) {
-            checkIdDOM.innerHTML = `<span class="idTrue">😃卡号格式正确</span>`;
-            flagId = 1;
-        } else if (rg.nonull(id)) {
-            checkIdDOM.innerHTML = "";
-            flagId = 0;
-        } else {
-            checkIdDOM.innerHTML = `<span class="idFalse">😥卡号格式错误</span>`;
-            flagId = 0;
-        }
-    })
-
-    // onfocus
-    cardIdDOM.addEventListener('focus', function () {
+    cardIdDOM.addEventListener("blur", function () {
+      let id = cardIdDOM.value;
+      if (rg.txqq(id)) {
+        checkIdDOM.innerHTML = `<span class="idTrue">😃卡号格式正确</span>`;
+        flagId = 1;
+      } else if (rg.nonull(id)) {
         checkIdDOM.innerHTML = "";
-        checkPwdDOM.innerHTML = "";
-    })
-
-    passWordDOM.addEventListener('focus', function () {
-        checkPwdDOM.innerHTML = "";
+        flagId = 0;
+      } else {
+        checkIdDOM.innerHTML = `<span class="idFalse">😥卡号格式错误</span>`;
+        flagId = 0;
+      }
     });
 
-    codeDOM.addEventListener('focus', function () {
-        checkCodeDOM.innerHTML = "";
-        checkPwdDOM.innerHTML = "";
-    })
+    // onfocus
+    cardIdDOM.addEventListener("focus", function () {
+      checkIdDOM.innerHTML = "";
+      checkPwdDOM.innerHTML = "";
+    });
 
+    passWordDOM.addEventListener("focus", function () {
+      checkPwdDOM.innerHTML = "";
+    });
 
+    codeDOM.addEventListener("focus", function () {
+      checkCodeDOM.innerHTML = "";
+      checkPwdDOM.innerHTML = "";
+    });
 
     //下一步点击事件
-    nextDOM.addEventListener('click', function () {
-        //获取用户输入的值
-        var id = document.querySelector('.cardId').value;
-        var pwd = passWordDOM.value;
-        var code = codeDOM.value;
-        //数据存入session
-        sessionStorage.setItem('id', id);
-        if (flagId == 0) {
-            checkIdDOM.innerHTML = `<span class="idFalse">😃请输入正确的卡号</span>`;
-            return;
-        }
-        //判断是否输入了密码
-        if (rg.nonull(pwd)) {
-            checkPwdDOM.innerHTML = "请输入密码";
-            return;
-        }
-        //判断是否输入了验证码
-        if (rg.nonull(code)) {
-            checkCodeDOM.innerHTML = "请输入验证码";
-            return;
-        }
-        //调用ajax函数
-        else {
-            myajax({
-                "url": "../php/login.php",
-                "arg": {
-                    "id": id,
-                    "pwd": pwd,
-                    "act": "card",
-                    "code": code
-                },
-                "success": function (re) {
-                    if (re.code == 2) {
-                        window.location.href = `idMessage.html`;
-                    } else {
-                        choose(re.code);
-                        console.log(re.code);
-                        console.log(re);
-                    }
-                }
-            });
-        }
+    nextDOM.addEventListener("click", function () {
+      //获取用户输入的值
+      var id = document.querySelector(".cardId").value;
+      var pwd = passWordDOM.value;
+      var code = codeDOM.value;
+      //数据存入session
+      sessionStorage.setItem("id", id);
+      if (flagId == 0) {
+        checkIdDOM.innerHTML = `<span class="idFalse">😃请输入正确的卡号</span>`;
+        return;
+      }
+      //判断是否输入了密码
+      if (rg.nonull(pwd)) {
+        checkPwdDOM.innerHTML = "请输入密码";
+        return;
+      }
+      //判断是否输入了验证码
+      if (rg.nonull(code)) {
+        checkCodeDOM.innerHTML = "请输入验证码";
+        return;
+      }
+      //调用ajax函数
+      else {
+        myajax({
+          url: "../php/login.php",
+          arg: {
+            id: id,
+            pwd: pwd,
+            act: "card",
+            code: code,
+          },
+          success: function (re) {
+            if (re.code == 2) {
+              window.location.href = `idMessage.html`;
+            } else {
+              choose(Number(re.code));
+              console.log(re.code);
+              console.log(re);
+            }
+          },
+        });
+      }
     });
 
     function choose(index) {
-        console.log(index);
-        switch (index) {
-            case 0:
-                hintDOM.style.display = "block";
-                break;
-            case 1:
-                checkPwdDOM.innerHTML = "卡已激活，未到生效期";
-                break;
-            case 3:
-                checkPwdDOM.innerHTML = "卡已过期";
-                break;
-            case 4:
-                checkPwdDOM.innerHTML = "账号或者密码错误";
-                break;
-            case 5:
-                checkPwdDOM.innerHTML = "验证码错误";
-                break;
-            default:
-                console.log(12345);
-                break;
-
-        }
+      console.log(index);
+      switch (index) {
+        case 0:
+          hintDOM.style.display = "block";
+          break;
+        case 1:
+          checkPwdDOM.innerHTML = "卡已激活，未到生效期";
+          break;
+        case 3:
+          checkPwdDOM.innerHTML = "卡已过期";
+          break;
+        case 4:
+          checkPwdDOM.innerHTML = "账号或者密码错误";
+          break;
+        case 5:
+          checkPwdDOM.innerHTML = "验证码错误";
+          break;
+        default:
+          console.log(12345);
+          break;
+      }
     }
 
     function goadd() {
-        window.location.href = `activeCard.html`;
+      window.location.href = `activeCard.html`;
     }
 
     function exit() {
-        hintDOM.style.display = "none";
+      hintDOM.style.display = "none";
     }
-</script>
-
+  </script>
 </html>

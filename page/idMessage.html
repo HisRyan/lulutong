@@ -143,6 +143,11 @@
     moreDOM.addEventListener("click", function () {
         console.log(1);
         window.location.href = "staff.html"
+    });
+    var exitDOM = document.querySelector(".exit");
+    exitDOM.addEventListener("click", function () {
+        sessionStorage.clear();
+        window.location.href = "loginActive.html";
     })
 </script>
 
